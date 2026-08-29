@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation | Deckboss</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --text: #1a1a1a;
+      --text-light: #666;
+      --bg: #fafafa;
+      --bg-alt: #f0f0f0;
+      --border: #e0e0e0;
+      --accent: #2c5aa0;
+      --accent-dark: #1a3a6b;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 3rem 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem 0;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .breadcrumb {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .breadcrumb a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .doc-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+    }
+
+    .doc-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(44, 90, 160, 0.1);
+    }
+
+    .doc-card h3 {
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      color: var(--text-light);
+    }
+
+    .coming-soon {
+      background: linear-gradient(to right, #f0f8ff, #fff);
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 4px;
+    }
+
+    .coming-soon p {
+      margin-bottom: 0;
+    }
+
+    .coming-soon strong {
+      color: var(--accent);
+    }
+
+    footer {
+      background: #f5f5f5;
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      nav {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .header-content {
+        padding: 0.8rem 1rem;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">deckboss</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="mailto:hello@deckboss.ai" class="btn">Get started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="breadcrumb"><a href="/">Home</a> / Documentation</div>
+      <h1>Documentation</h1>
+      <p>Technical guides, API reference, and operational playbooks for deckboss deployments.</p>
+    </section>
+
+    <section>
+      <h2>Getting started</h2>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <h3>Installation</h3>
+          <p>Hardware setup, camera calibration, and network configuration for your vessel.</p>
+        </div>
+        <div class="doc-card">
+          <h3>Configuration</h3>
+          <p>Tote layout, species aliases, audit settings, and A/B parameters.</p>
+        </div>
+        <div class="doc-card">
+          <h3>First deployment</h3>
+          <p>Running your first labeled loop, captain's best-shot audit, and initial model bootstrap.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>System guides</h2>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <h3>The tote rule</h3>
+          <p>Understanding ground truth, constraint cells, and the species label mapping.</p>
+        </div>
+        <div class="doc-card">
+          <h3>Cross-camera handoff</h3>
+          <p>Timestamp matching, underwater label propagation, and overlap window tuning.</p>
+        </div>
+        <div class="doc-card">
+          <h3>Sounder training</h3>
+          <p>Hook counting, depth labeling, echogram inference, and nightly retraining.</p>
+        </div>
+        <div class="doc-card">
+          <h3>Model promotion</h3>
+          <p>A/B testing, rollback behavior, and the night cron schedule.</p>
+        </div>
+        <div class="doc-card">
+          <h3>Best-shot audit</h3>
+          <p>Frame selection, captain review interface, and label quarantine.</p>
+        </div>
+        <div class="doc-card">
+          <h3>Weight ledger</h3>
+          <p>Scale integration, dial reading, and passive record capture.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Troubleshooting & reference</h2>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <h3>Failure modes</h3>
+          <p>Mis-sorted fish, ambiguous matches, retrain drift, and mitigation strategies.</p>
+        </div>
+        <div class="doc-card">
+          <h3>Operational playbooks</h3>
+          <p>Daily checks, reviewing audit flags, and manual label corrections.</p>
+        </div>
+        <div class="doc-card">
+          <h3>API & data export</h3>
+          <p>Accessing labeled data, model weights, and integration with your fleet systems.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="coming-soon">
+      <p><strong>These docs are being built.</strong> Full documentation, API reference, and playbooks are coming soon. In the meantime, <a href="mailto:hello@deckboss.ai">reach out</a> with specific questions—we'll walk you through the system over the phone.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Deckboss. Built by the fleet.</p>
+  </footer>
+</body>
+</html>

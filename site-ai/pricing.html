@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing | Deckboss</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --text: #1a1a1a;
+      --text-light: #666;
+      --bg: #fafafa;
+      --bg-alt: #f0f0f0;
+      --border: #e0e0e0;
+      --accent: #2c5aa0;
+      --accent-dark: #1a3a6b;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 3rem 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .pricing-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--accent);
+      transform: scale(1.05);
+    }
+
+    .pricing-card.featured::after {
+      content: "Most Popular";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .pricing-card {
+      position: relative;
+    }
+
+    .plan-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .plan-description {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .price-note {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+    }
+
+    .features {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .features li {
+      padding: 0.6rem 0;
+      font-size: 0.95rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+    }
+
+    .features li:before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: bold;
+      margin-right: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    .pricing-card .btn {
+      width: 100%;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .faq-section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+
+    .faq-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .faq-item {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent);
+    }
+
+    .faq-answer {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .contact-note {
+      background: linear-gradient(to right, #f0f8ff, #fff);
+      border-left: 4px solid var(--accent);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .contact-note p {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      background: #f5f5f5;
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .pricing-card.featured {
+        transform: scale(1);
+      }
+
+      nav {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .header-content {
+        padding: 0.8rem 1rem;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
+
+      .price {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">deckboss</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/docs/">Docs</a>
+        <a href="mailto:hello@deckboss.ai" class="btn">Get started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h1>Pricing</h1>
+      <p class="subtitle">Transparent pricing for every boat. No surprise fees. You pay for what you use.</p>
+    </section>
+
+    <section>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="plan-name">Pilot</div>
+          <div class="plan-description">Start small, prove it works</div>
+          <div class="price">Custom</div>
+          <div class="price-note">Contact us for details</div>
+          <ul class="features">
+            <li>Single vessel deployment</li>
+            <li>Basic species identification</li>
+            <li>Best-shot audit interface</li>
+            <li>Monthly model updates</li>
+            <li>Email support</li>
+          </ul>
+          <a href="mailto:hello@deckboss.ai" class="btn">Get a quote</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="plan-name">Full Fleet</div>
+          <div class="plan-description">Production-grade deployment</div>
+          <div class="price">Custom</div>
+          <div class="price-note">Contact us for details</div>
+          <ul class="features">
+            <li>Multi-vessel deployment</li>
+            <li>Species ID + sounder training</li>
+            <li>Nightly retraining + A/B</li>
+            <li>Weight ledger system</li>
+            <li>Best-shot audit at scale</li>
+            <li>Training rig rental included</li>
+            <li>Dedicated support</li>
+          </ul>
+          <a href="mailto:hello@deckboss.ai" class="btn">Get a quote</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="plan-name">Training Rig</div>
+          <div class="plan-description">Rental for new deployments</div>
+          <div class="price">Custom</div>
+          <div class="price-note">Seasonal or annual</div>
+          <ul class="features">
+            <li>Global-shutter stereo cameras</li>
+            <li>Temporary deployment</li>
+            <li>Bootstrap training data</li>
+            <li>Return after model cutover</li>
+            <li>Technical support</li>
+          </ul>
+          <a href="mailto:hello@deckboss.ai" class="btn">Inquire</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently asked</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">What's included in the pricing?</div>
+        <div class="faq-answer">Hardware installation, camera calibration, cell configuration for your boat's layout, and ongoing model updates. Everything you need to run independent of us once it's deployed.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Do you charge per fish or per day?</div>
+        <div class="faq-answer">No. We charge once for deployment and model setup. Monthly updates are included. The system runs on your boat's network; you own the data and the trained models.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What about the training rig?</div>
+        <div class="faq-answer">The expensive stereo cameras are rented temporarily—typically one season. Once the model works on your cheap permanent cameras (via the tote rule), the rig comes off and goes to the next boat or your training program. You own the weights; the hardware depreciates into the rental business.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How long to deploy?</div>
+        <div class="faq-answer">Install → calibrate → run initial tote-label loop → audit captain's review → first retrain. Typically 2-4 weeks of active fishing to bootstrap. A/B promotion starts day one; the system improves nightly.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What if we want to expand to more boats later?</div>
+        <div class="faq-answer">The system is built for multi-vessel deployment from the start. Models are portable; the trained weights move between boats. Adding a second vessel is an installation and calibration—not a new license.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Do you keep the data?</div>
+        <div class="faq-answer">No. The labeled data (tote labels, weights, timestamps) stays on your boat. You can export it anytime. The trained models are yours to keep or update on your own timeline.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What about support when the model misbehaves?</div>
+        <div class="faq-answer">Your captain's best-shot audit is the first gate—that catches and quarantines bad labels. If the A/B cell flags drift, rollback happens automatically. We monitor overnight retrains and help tune the system once it's live. But the system is built to be stable without constant human oversight.</div>
+      </div>
+    </section>
+
+    <section class="contact-note">
+      <p>Pricing depends on your boat's configuration, number of cameras, and desired features. Let's talk specifics.</p>
+      <a href="mailto:hello@deckboss.ai" class="btn">Schedule a call</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Deckboss. Built by the fleet.</p>
+  </footer>
+</body>
+</html>

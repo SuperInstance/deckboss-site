@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works | Deckboss</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --text: #1a1a1a;
+      --text-light: #666;
+      --bg: #fafafa;
+      --bg-alt: #f0f0f0;
+      --border: #e0e0e0;
+      --accent: #2c5aa0;
+      --accent-dark: #1a3a6b;
+      --code-bg: #f5f5f5;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 3rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child {
+      border-bottom: none;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 2rem 0 1rem 0;
+      font-weight: 600;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .breadcrumb {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .breadcrumb a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      color: #c7254e;
+    }
+
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    .pipeline-step {
+      background: white;
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 4px;
+    }
+
+    .pipeline-step h3 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+
+    .cell-reference {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 6px;
+    }
+
+    .cell-reference .cell-name {
+      font-weight: 600;
+      color: var(--accent);
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
+
+    .note {
+      background: linear-gradient(to right, #f0f8ff, #fff);
+      border-left: 4px solid var(--accent);
+      padding: 1rem;
+      margin: 2rem 0;
+      border-radius: 4px;
+      font-size: 0.95rem;
+    }
+
+    .note strong {
+      color: var(--accent);
+    }
+
+    ul, ol {
+      margin: 1.5rem 0;
+      padding-left: 2rem;
+      color: var(--text-light);
+    }
+
+    li {
+      margin-bottom: 0.8rem;
+      line-height: 1.7;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .compare-table th {
+      background: var(--accent);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .compare-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .compare-table tr:nth-child(even) {
+      background: var(--code-bg);
+    }
+
+    footer {
+      background: #f5f5f5;
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
+
+      nav {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .header-content {
+        padding: 0.8rem 1rem;
+      }
+
+      .code-block {
+        font-size: 0.75rem;
+      }
+
+      .compare-table {
+        font-size: 0.9rem;
+      }
+
+      .compare-table th,
+      .compare-table td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">deckboss</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/docs/">Docs</a>
+        <a href="mailto:hello@deckboss.ai" class="btn">Get started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="breadcrumb"><a href="/">Home</a> / How it works</div>
+      <h1>How deckboss learns</h1>
+      <p>The system is built on one principle: the crew already sorts. That sorting is ground truth. Everything else is wiring.</p>
+    </section>
+
+    <section>
+      <h2>1. The tote rule: ground truth at the source</h2>
+      <p>Your crew sorts fish by hand into totes—the port tote gets pinks, the center hold gets chums, the starboard halves get kings and cohos. That gesture, repeated thousands of times a season, is the label. No annotators. No contractors. No overhead.</p>
+
+      <div class="pipeline-step">
+        <h3>Deck cameras watch the gesture</h3>
+        <p>Four constraint-cells watch the four destinations. When a fish enters the port tote volume, that cell emits: <code>species = pink</code>. Hard rule. Not a guess. The crew's sorting is professional-grade because sorting is their job.</p>
+      </div>
+
+      <div class="cell-reference">
+        <div class="cell-name">TOTE-PORT, TOTE-HOLD, TOTE-STBD-F, TOTE-STBD-A</div>
+        <p>Constraint cells that emit ground truth as a rule from observed action, not prediction. Distinct from classifiers: they cannot be wrong about their rule, only about the event they observe.</p>
+      </div>
+
+      <div class="note">
+        <strong>Aliases:</strong> Decks use multiple names for the same fish. "Pink" or "humpy." "Chum," "dog," or "keta." An alias-table maps overheard deck conversation to canonical IDs. New aliases are data rows, not schema migrations.
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Cross-camera handoff: label propagation</h2>
+      <p>Your underwater camera sees a fish and records it—the most valuable footage, hardest to label. Seconds later, the same fish breaks surface on a deck camera. Timestamps match inside a tight window. The tote label that landed on deck propagates backward to the underwater sighting retroactively.</p>
+
+      <div class="pipeline-step">
+        <h3>Timestamp correlation, not tracking</h3>
+        <p>Leave-frame event at 12:34:05.2 on CAM-UW. Surface-break event at 12:34:07.8 on CAM-DECK. Same window. Same fish. The underwater footage now has a label: the tote it eventually landed in. The handoff is asymmetric and that is the point—deck is the label source, underwater is the label sink.</p>
+      </div>
+
+      <div class="cell-reference">
+        <div class="cell-name">XID-MATCH</div>
+        <p>Timestamp-match cell. Window is a dial (tunable). When overlap windows are ambiguous (two fish in the window), emit <code>ambiguous</code>—flag it, never guess. Lost labels cost one training example. Wrong labels cost trust.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Sounder self-training: geometry as a sensor</h2>
+      <p>Your troll gear is known: 30 hooks, 1.5 fathoms apart. The cannonball depth is the hook count times spacing. A deck camera counts visible hooks in the water column. That count gives you the depth. Depth + echogram at that timestamp = a labeled sounder training pair.</p>
+
+      <div class="pipeline-step">
+        <h3>No extra underwater sensors needed</h3>
+        <p>The rope that was already there, already maintained, already paid for becomes a depth sensor. The sounder learns from echogram-depth pairs without needing the most failure-prone camera on the boat.</p>
+      </div>
+
+      <div class="cell-reference">
+        <div class="cell-name">HOOK-COUNT, SOUNDER</div>
+        <p>HOOK-COUNT is a count-cell: known structure becomes instrumentation. SOUNDER receives labeled depth data and improves its echogram inference nightly without dependency on the underwater camera.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Overnight autotrain + A/B promotion</h2>
+      <p>The boat is idle at night. That is a resource: free compute, free power headroom, no contention. The system retrains on the day's labeled data. The next day, the new model runs live, A/B tested against what you already deployed. Only winning models ship. Rollback is the default.</p>
+
+      <div class="pipeline-step">
+        <h3>Schedule, not habit</h3>
+        <p>Night cron fires automatically. The day's labeled data retrains the sounder model. At dawn, the challenger and incumbent race on the crew's continued sorting into totes. The crew's tote labels are continuous fresh ground truth—not passing through the model being promoted. If the challenger wins, it becomes the incumbent. If it loses, rollback is automatic. No Wesley-iteration babysitting. No dashboard watching. Improvement is scheduled, not remembered.</p>
+      </div>
+
+      <div class="cell-reference">
+        <div class="cell-name">NIGHT-CRON, AB-PROMOTE</div>
+        <p>NIGHT-CRON is a cron-cell: scheduled self-improvement at a substrate tick, not an agent habit. AB-PROMOTE is an A/B cell: promotion is earned on next-day feedback. Rollback is the default outcome of every night.</p>
+      </div>
+
+      <div class="note">
+        <strong>Why this works:</strong> Conventional retraining loops can drift silently—a slightly degraded model mislabels more, those mislabels retrain the next model, the system erodes while dashboards stay green. The A/B gate breaks that feedback loop: if you don't beat tomorrow's tote labels (data that never passes through your model), you don't ship.
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Weight records: passive capture</h2>
+      <p>A hanging scale with its dial in view of a camera. Your crew weighs fish when speed isn't a factor—the camera reads the same dial. Nobody keeps records. The camera keeps them, passively, when the behavior happens, never demanding the behavior.</p>
+
+      <div class="pipeline-step">
+        <h3>Passive ledger, zero marginal cost</h3>
+        <p>The ledger records (timestamp, weight, species-from-tote) tuples whenever the scale is used. This is not a random sample—it is an honest record of when your crew actually weighs fish. It undersamples the catch because that is when speed matters. That is the right bias.</p>
+      </div>
+
+      <div class="cell-reference">
+        <div class="cell-name">CAM-SCALE, LEDGER-SCALE</div>
+        <p>Ledger-cell pair. Passive capture of existing workflow, zero overhead per datum. Never demands the behavior, only records it when it happens.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Best-shot audit: targeted review</h2>
+      <p>Essential frames pulled from every fish's footage, plus one best-shot per fish (selected by sharpness, angle, lighting). You flip through pictures from the wheelhouse when identity carries legal weight—during openings where only pinks and chums are legal, a mislabeled king is not cosmetic, it is regulatory.</p>
+
+      <div class="pipeline-step">
+        <h3>Audit where it matters</h3>
+        <p>When identity is critical, you review. When it is not, you do not. Your captain's disagreement with the tote label quarantines that fish and the underwater sighting that inherited its label out of the night's training set. That single example is excised precisely, not statistically. The audit is not QA theater; it is a gate that separates noisy labels from training data.</p>
+      </div>
+
+      <div class="cell-reference">
+        <div class="cell-name">BESTSHOT, AUDIT-CAPTAIN</div>
+        <p>BESTSHOT is a review-surface cell: per-fish essential frames plus one best-shot. AUDIT-CAPTAIN is an audit cell: targeted human review where identity is consequential, whose disagreement quarantines labels.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>7. Training rig: scaffolding, then rental</h2>
+      <p>Global-shutter stereoscopic cameras are expensive sensing. You deploy them temporarily—to bootstrap depth labels and give the sounder a head start. Once the model works on cheap permanent cameras (the tote rule does the labeling), the rig comes off the boat and becomes a rental business for technician training and new deployments.</p>
+
+      <div class="note">
+        <strong>Economics:</strong> The trained state is portable and sensor-independent; the scaffolding that produced it is not part of the product. The weights are yours. The rig is rentable. It depreciates into a new business line.
+      </div>
+    </section>
+
+    <section>
+      <h2>Why this beats conventional ML</h2>
+
+      <table class="compare-table">
+        <tr>
+          <th>Conventional stage</th>
+          <th>Deckboss replacement</th>
+          <th>Why it's better</th>
+        </tr>
+        <tr>
+          <td>Annotation contractors</td>
+          <td>Crew's tote sorting</td>
+          <td>Zero cost, zero latency, zero drift from the actual task</td>
+        </tr>
+        <tr>
+          <td>Labeling tools & review queues</td>
+          <td>Captain best-shot audit (targeted)</td>
+          <td>Review effort spent exactly where identity is critical</td>
+        </tr>
+        <tr>
+          <td>Experiment tracking / orchestration</td>
+          <td>NIGHT-CRON + next-day data</td>
+          <td>The day's catch is the experiment log; schedule is substrate-guaranteed</td>
+        </tr>
+        <tr>
+          <td>Model promotion decisions</td>
+          <td>AB-PROMOTE cell (rollback default)</td>
+          <td>Promotion earned on next-day feedback, not argued in meetings</td>
+        </tr>
+        <tr>
+          <td>Serving infrastructure</td>
+          <td>Same cameras, same cells</td>
+          <td>No separate serving tier; inference lives where data arrives</td>
+        </tr>
+        <tr>
+          <td>Data drift monitoring</td>
+          <td>Continuous tote labels</td>
+          <td>Drift measured against ground truth that regenerates daily</td>
+        </tr>
+      </table>
+
+      <p>The deep reason this works: <strong>ground truth is distributed at the point of action.</strong> Conventional pipelines centralize labels (collect → ship → train → deploy → monitor) and pay a synchronization tax at every arrow. Deckboss pays no synchronization tax anywhere except one timestamp match—seconds long—between two cameras watching the same event.</p>
+
+      <p>And the ceiling is honest, not hand-wavy: the ML gets as good as the human crew because the crew's sorting is the label. You cannot get better labels than a working practitioner doing working-practitioner sorting, without inventing new work.</p>
+    </section>
+
+    <section>
+      <h2>Honest about what can go wrong</h2>
+
+      <h3>Mis-sorted fish poison the labels</h3>
+      <p>A pink thrown in the center hold teaches the system chum. This is the poison vector of naive behavior-as-label systems.</p>
+      <p><strong>Mitigation:</strong> The audit cell. Your captain's best-shot review quarantines suspicious labels out of the training set, marking the underwater sighting that inherited the label for quarantine too. When identity carries consequence, the audit gate catches the error before it retrains the model. Label poison is traceable to (fish, tote, timestamp)—a single bad example can be excised precisely.</p>
+
+      <h3>Overlap windows in the cross-camera handoff</h3>
+      <p>When fishing is hot, two fish can transit the underwater-to-surface window at once. The tote label attaches to the wrong sighting.</p>
+      <p><strong>Mitigation:</strong> Flag, never guess. When ambiguity lives inside the window, emit <code>ambiguous</code>. The underwater sighting goes unlabeled. A lost label costs one training example. A wrong label costs trust in every label. The system surfaces ambiguity for human review instead of guessing.</p>
+
+      <h3>Night-retrain drift</h3>
+      <p>Self-labeling is a feedback loop. A subtly degraded model mislabels more. Those mislabels retrain the next model. Silent degradation while dashboards stay green.</p>
+      <p><strong>Mitigation:</strong> The A/B cell as circuit breaker. Promotion is earned on next-day feedback—the crew's tote labels, which never pass through the model being promoted. If the challenger does not beat the incumbent on tomorrow's tote data, tonight's model never ships. Rollback is automatic. Drift is bounded to one day, not silent compound over weeks.</p>
+
+      <h3>Two more for completeness</h3>
+      <p><strong>Alias collision:</strong> Regional vocabulary drifts. The alias-table grows rows, not schemas—but new aliases should surface in the audit pile when they suddenly spike.</p>
+      <p><strong>The ledger's blind spot:</strong> The scale camera records when your crew weighs. It cannot notice that nobody weighed the big one because it was raining. Passive ledgers inherit the crew's attention patterns. That is honest record-keeping, not a random sample.</p>
+    </section>
+
+    <section>
+      <h2>The constraint vocabulary</h2>
+      <p>Everything is a cell. The Back Deck application uses eight kinds, all spreadsheet-vibe:</p>
+
+      <ol>
+        <li><strong>Constraint-cell:</strong> Emits ground truth as a rule (tote volume → species)</li>
+        <li><strong>Alias-table:</strong> Overheard names map to canonical IDs; rows grow from conversation</li>
+        <li><strong>Match-cell:</strong> Timestamp correlation inside a window; flags ambiguity</li>
+        <li><strong>Count-cell:</strong> Known structure becomes instrumentation (30 hooks → depth)</li>
+        <li><strong>Ledger-cell:</strong> Passively records existing behavior</li>
+        <li><strong>Cron-cell:</strong> Scheduled tick; cannot be starved by daytime traffic</li>
+        <li><strong>A/B-cell:</strong> Challenger vs. incumbent; promotion earned on next-day feedback</li>
+        <li><strong>Audit-cell:</strong> Targeted human review; disagreement quarantines labels</li>
+      </ol>
+
+      <p>No cell named "model," "pipeline," "service," or "queue." Intelligence is at the bottom (Hebbian substrate). This layer contributes constraints, records, and gates—parts of the application that must never be mysterious. A deckhand who understands totes can audit any cell.</p>
+    </section>
+
+    <section>
+      <h2>Next: deployment</h2>
+      <p>Ready to see deckboss on your boat? <a href="mailto:hello@deckboss.ai">Let's talk.</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Deckboss. Built by the fleet.</p>
+  </footer>
+</body>
+</html>

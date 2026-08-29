@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deckboss | Back-Deck Camera System for Salmon Trollers</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --text: #1a1a1a;
+      --text-light: #666;
+      --bg: #fafafa;
+      --bg-alt: #f0f0f0;
+      --border: #e0e0e0;
+      --accent: #2c5aa0;
+      --accent-dark: #1a3a6b;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+      padding: 4rem 2rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .feature-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .spec-list {
+      background: white;
+      border-radius: 6px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .spec-list li {
+      list-style: none;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .spec-list li:last-child {
+      border-bottom: none;
+    }
+
+    .spec-list strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .spec-list p {
+      margin: 0.5rem 0 0 0;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .diagram-section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+
+    .diagram {
+      background: var(--bg-alt);
+      padding: 1.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    .cta-section {
+      background: var(--accent);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 6px;
+      margin: 3rem 0;
+    }
+
+    .cta-section h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .cta-section .btn {
+      background: white;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .cta-section .btn:hover {
+      background: var(--bg-alt);
+    }
+
+    footer {
+      background: #f5f5f5;
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      nav {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .header-content {
+        padding: 0.8rem 1rem;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
+
+      .hero {
+        padding: 2rem 1rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">deckboss</a>
+      <nav>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/docs/">Docs</a>
+        <a href="mailto:hello@deckboss.ai" class="btn">Get started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Camera system that learns from your crew</h1>
+        <p>The crew's sorting is the label. Real-time species identification, sounder depth training, and nightly self-improvement without the overhead.</p>
+        <div class="hero-buttons">
+          <a href="/how-it-works.html" class="btn">How it works</a>
+          <a href="mailto:hello@deckboss.ai" class="btn btn-outline">Contact us</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What deckboss does</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Species identification</h3>
+          <p>Deck cameras watch your crew sort into totes—port means pink, center means chum. The crew's sorting becomes ground truth. No annotation contractors. No labeling overhead.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Underwater to surface</h3>
+          <p>When a fish leaves the underwater frame and breaks surface seconds later, timestamps match it back. Your underwater footage gets labeled automatically. No extra sensors needed in the column.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Sounder self-trains</h3>
+          <p>Count the hooks on your vertical gear—30 hooks, 1.5 fathoms apart—and the echogram gets depth labels without the underwater camera. Your sounder model improves every night.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Overnight autotrain</h3>
+          <p>While the boat sits idle at night, the day's labeled data retrains the model. Next day, the new version runs live. A/B tested against your crew's continued sorting. Rollback is the default.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Weight records</h3>
+          <p>Hang the scale in view of a camera. Your crew weighs fish the same way—the camera keeps records nobody keeps. Passively. When speed isn't a factor.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Best-shot audit</h3>
+          <p>One best-shot frame per fish, essential frames for review. You flip through pictures from the wheelhouse when identity matters—during openings where only pinks and chums are legal.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>The tote rule</h2>
+      <p class="section-subtitle">Where a fish is thrown is what a fish is.</p>
+
+      <div class="spec-list">
+        <li>
+          <strong>Port tote</strong>
+          <p>Pink / Humpy</p>
+        </li>
+        <li>
+          <strong>Center hold</strong>
+          <p>Chum / Dog / Keta</p>
+        </li>
+        <li>
+          <strong>Fore starboard half-tote</strong>
+          <p>King / Chinook</p>
+        </li>
+        <li>
+          <strong>Aft starboard half-tote</strong>
+          <p>Coho / Silver</p>
+        </li>
+      </div>
+
+      <div class="diagram-section">
+        <h3>System flow</h3>
+        <div class="diagram">
+DECK CAMERAS (tote rule)
+    ├── TOTE-PORT → pink/humpy
+    ├── TOTE-HOLD → chum/dog/keta
+    ├── TOTE-STBD-F → king/chinook
+    └── TOTE-STBD-A → coho/silver
+         │
+         ├─→ CAM-UW (via timestamp match)
+         │   └── underwater footage labeled retroactively
+         │
+         ├─→ HOOK-COUNT
+         │   └── SOUNDER (depth-labeled echograms)
+         │
+         └─→ NIGHT-CRON
+             ├── Retrain on day's labels
+             ├── A/B vs incumbent
+             └── Rollback default: only promote if you beat today's crew
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Honest about what can go wrong</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Mis-sorted fish</h3>
+          <p>A pink in the center hold teaches the system chum. Your captain's best-shot audit quarantines suspicious labels before they retrain the model. Identity-critical decisions only.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Overlap windows</h3>
+          <p>When fishing is hot, two fish can transit the underwater-to-surface window at once. We flag ambiguous matches, never guess. A lost label costs one example. A wrong label costs trust.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Night-retrain drift</h3>
+          <p>Self-labeling can feedback into itself and degrade slowly. The A/B cell gates every promotion: if tonight's model doesn't beat tomorrow's tote labels, it doesn't ship. Rollback is automatic.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Infrastructure that scales with your crew</h2>
+      <div class="spec-list">
+        <li>
+          <strong>Temporary training rig</strong>
+          <p>Global-shutter stereo cameras bootstrap the model. Once the system works on cheap permanent cameras—tote rule as ground truth—the training rig gets removed and becomes a rental for technician training and new deployments.</p>
+        </li>
+        <li>
+          <strong>No babysitting</strong>
+          <p>The improvement loop is scheduled: night cron, next-day A/B, repeat. Not a habit. Not an agent. A tick in the substrate that runs whether anyone's watching or not.</p>
+        </li>
+        <li>
+          <strong>Grounded in quilt</strong>
+          <p>Built on quilt-verilog: cells, links, dials, ticks. The pipeline is wiring, not programming. A deckhand who understands totes can audit any cell. Everything is data: rules, tables, schedules, gates, ledgers.</p>
+        </li>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h3>Ready to deploy?</h3>
+      <p>Let's talk about your boat, your crew, and your catch.</p>
+      <a href="mailto:hello@deckboss.ai" class="btn">Get in touch</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/docs/">Docs</a>
+        <a href="mailto:hello@deckboss.ai">Contact</a>
+      </div>
+      <p>&copy; 2026 Deckboss. Built by the fleet.</p>
+    </div>
+  </footer>
+</body>
+</html>

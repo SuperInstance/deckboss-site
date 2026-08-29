@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deckboss Fleet Services | Training & Equipment Rental</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --text: #1a1a1a;
+      --text-light: #666;
+      --bg: #fafafa;
+      --bg-alt: #f0f0f0;
+      --border: #e0e0e0;
+      --accent: #2c5aa0;
+      --accent-dark: #1a3a6b;
+      --success: #27ae60;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .tagline {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-weight: 400;
+      margin-top: 0.2rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+    }
+
+    .btn-secondary {
+      background: var(--success);
+    }
+
+    .btn-secondary:hover {
+      background: #229954;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+      padding: 4rem 2rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--accent);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .feature-card h3 {
+      margin-top: 0;
+    }
+
+    .feature-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .course-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .course-header {
+      background: var(--accent);
+      color: white;
+      padding: 1.5rem;
+    }
+
+    .course-header h3 {
+      color: white;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .course-duration {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .course-body {
+      padding: 1.5rem;
+    }
+
+    .course-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .course-body li {
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      position: relative;
+      color: var(--text-light);
+    }
+
+    .course-body li:before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .course-footer {
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-alt);
+    }
+
+    .equipment-specs {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .spec-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .spec-row:last-child {
+      border-bottom: none;
+    }
+
+    .spec-label {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .spec-value {
+      color: var(--text-light);
+    }
+
+    .pricing-note {
+      background: linear-gradient(to right, #f0f8ff, #fff);
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 4px;
+    }
+
+    .pricing-note strong {
+      color: var(--accent);
+    }
+
+    .contact-section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 3rem auto;
+    }
+
+    .contact-section h2 {
+      text-align: left;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-email {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-alt);
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    .contact-email p {
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    .contact-email a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .contact-email a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background: #f5f5f5;
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      nav {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .header-content {
+        padding: 0.8rem 1rem;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
+
+      .hero {
+        padding: 2rem 1rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .spec-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .spec-label {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div>
+        <a href="/" class="logo">deckboss</a>
+        <div class="tagline">fleet services</div>
+      </div>
+      <nav>
+        <a href="#training">Training</a>
+        <a href="#rental">Equipment rental</a>
+        <a href="#contact">Contact</a>
+        <a href="https://deckboss.ai" class="btn">deckboss.ai</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Technical training & equipment for fleet deployment</h1>
+        <p>Hands-on courses for technicians, training-rig rental for new deployments, and ongoing support to keep cameras running across your fleet.</p>
+      </div>
+    </section>
+
+    <section id="training">
+      <h2>Training courses</h2>
+      <p style="text-align: center; margin-bottom: 3rem; color: var(--text-light);">Classroom and field training for technicians deploying deckboss systems across the fleet.</p>
+
+      <div class="course-card">
+        <div class="course-header">
+          <h3>Camera systems fundamentals</h3>
+          <div class="course-duration">2 days | on-site or classroom</div>
+        </div>
+        <div class="course-body">
+          <p>Essential concepts for technicians new to vessel camera systems.</p>
+          <ul>
+            <li>Global-shutter vs. rolling-shutter fundamentals</li>
+            <li>Stereoscopic depth sensing (temporary training rig)</li>
+            <li>Network setup and power delivery on boats</li>
+            <li>Cable routing and weatherproofing</li>
+            <li>Basic troubleshooting and diagnostics</li>
+          </ul>
+          <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 1rem;"><strong>Who:</strong> Technicians deploying first system, experienced deck crew learning new tools.</p>
+        </div>
+        <div class="course-footer">
+          <a href="mailto:training@deckboss.net?subject=Camera%20Systems%20Fundamentals%20Course" class="btn">Enroll</a>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-header">
+          <h3>Deckboss calibration & deployment</h3>
+          <div class="course-duration">3 days | on your boat</div>
+        </div>
+        <div class="course-body">
+          <p>Complete deployment from hardware to first labeled loop.</p>
+          <ul>
+            <li>Camera positioning for tote rule constraints</li>
+            <li>Calibrating intrinsic & extrinsic parameters</li>
+            <li>Configuring species aliases and tote mappings</li>
+            <li>Testing the label loop with live fish</li>
+            <li>Captain's best-shot audit walkthrough</li>
+            <li>Nightly retraining & A/B promotion schedule</li>
+          </ul>
+          <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 1rem;"><strong>Who:</strong> Technicians deploying on working vessels, boat captains & crew.</p>
+        </div>
+        <div class="course-footer">
+          <a href="mailto:training@deckboss.net?subject=Deployment%20Course%20Inquiry" class="btn">Schedule</a>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-header">
+          <h3>Advanced troubleshooting & optimization</h3>
+          <div class="course-duration">2 days | on-site</div>
+        </div>
+        <div class="course-body">
+          <p>Deep dive into system tuning, failure modes, and drift mitigation.</p>
+          <ul>
+            <li>Diagnosing timestamp-match ambiguities</li>
+            <li>Adjusting overlap windows for hot fishing</li>
+            <li>Reading audit flags and quarantine behavior</li>
+            <li>Understanding A/B promotion and rollback</li>
+            <li>Monitoring nightly retraining logs</li>
+            <li>Sensor failure modes and fallbacks</li>
+          </ul>
+          <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 1rem;"><strong>Who:</strong> Experienced technicians, captains managing multi-boat fleets.</p>
+        </div>
+        <div class="course-footer">
+          <a href="mailto:training@deckboss.net?subject=Advanced%20Troubleshooting%20Course" class="btn">Register</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="rental">
+      <h2>Training rig rental</h2>
+      <p style="text-align: center; margin-bottom: 3rem; color: var(--text-light);">Global-shutter stereo cameras for bootstrap training, removed once your model is production-ready.</p>
+
+      <div class="equipment-specs">
+        <h3>What's included</h3>
+        <div class="spec-row">
+          <div class="spec-label">Cameras</div>
+          <div class="spec-value">Global-shutter stereo pair, 1920×1200, 90 fps, IP67 rated. Temporary deployment only.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-label">Calibration data</div>
+          <div class="spec-value">Factory intrinsic and relative pose provided. On-site calibration during deployment course included.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-label">Supporting hardware</div>
+          <div class="spec-value">Underwater housing, brackets, cables, adapters for your boat's configuration. Return packaging included.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-label">Technical support</div>
+          <div class="spec-value">Email + phone support during rental period. Remote diagnostics, firmware updates, cable/housing repairs.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-label">Lifespan on your boat</div>
+          <div class="spec-value">Typically one full season (~6-12 months). Removed once your system works on cheap permanent cameras and the tote rule is calibrated.</div>
+        </div>
+      </div>
+
+      <div class="pricing-note">
+        <strong>Pricing:</strong> Seasonal or annual rental rates depend on deployment timeline and your vessel class. Ask about multi-boat fleet discounts. Damage outside normal operation may incur repair fees.
+      </div>
+
+      <h3>Return process</h3>
+      <div class="feature-card">
+        <p>1. You schedule removal with us when the model is stable on permanent cameras. 2. We coordinate logistics and ship return boxes. 3. You disconnect, pack, and ship the rig back. 4. We inspect, recalibrate, and make ready for the next deployment. 5. Your rental period ends.</p>
+      </div>
+
+      <h3>How it works economically</h3>
+      <p>The stereo rig is <strong>scaffolding</strong>, not product. It bootstraps your depth labels and trains the sounder. Once the system learns from the tote rule and hook counting, cheap permanent cameras are all you need. The trained model is portable; the equipment depreciates into a rental business that funds new deployments and training courses. You buy the weights; you rent the hardware that produced them.</p>
+
+      <div class="contact-email" style="margin-top: 2rem;">
+        <p>Questions about rental terms or availability?</p>
+        <a href="mailto:rental@deckboss.net">rental@deckboss.net</a>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-section">
+        <h2>Get in touch</h2>
+        <div class="contact-email">
+          <p><strong>Email us directly for fastest response:</strong></p>
+          <p>
+            <a href="mailto:training@deckboss.net">training@deckboss.net</a> — course enrollment & scheduling<br>
+            <a href="mailto:rental@deckboss.net">rental@deckboss.net</a> — equipment rental inquiries<br>
+            <a href="mailto:support@deckboss.net">support@deckboss.net</a> — technical support & troubleshooting
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#training">Training</a>
+      <a href="#rental">Equipment rental</a>
+      <a href="#contact">Contact</a>
+      <a href="https://deckboss.ai">deckboss.ai (product)</a>
+    </div>
+    <p>&copy; 2026 Deckboss Fleet Services. Built by the fleet.</p>
+  </footer>
+</body>
+</html>
